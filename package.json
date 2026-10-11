@@ -1,0 +1,25 @@
+{
+  "name": "products-ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Plain HTML5/CSS3/ES-modules frontend for the Products API (PHP developer test assignment).",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p jsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}

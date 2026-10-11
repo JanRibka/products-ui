@@ -1,0 +1,10 @@
+node_modules/
+coverage/
+dist/
+*.log
+.DS_Store
+.vscode/
+
+# Compose variable-substitution overrides (host ports). Optional, local-only,
+# NOT committed. .env.example is the template.
+.env

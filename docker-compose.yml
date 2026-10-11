@@ -1,0 +1,46 @@
+# UI stack: a single nginx service that serves the static frontend and
+# proxies /api to the API project's nginx over the shared Docker network.
+#
+# IMPORTANT: the API stack must be started first (from the API repo's
+# docker/ directory) because it creates the external network
+# "products_products-network" that this compose file joins:
+#
+#   cd ../api/docker && docker compose up -d --build
+#   docker compose exec app composer install
+#   docker compose exec app php tracker migrations:migrate
+#   docker compose exec app php tracker fixtures:load
+#
+# Then, from this (ui/) directory:
+#
+#   docker compose up
+#
+# The UI is available at http://localhost:8080
+#
+# The host port is configurable with a default so the stack runs without any
+# extra file. To override, create ui/.env (optional, local-only, NOT committed)
+# with e.g. UI_PORT=8090. ui/.env.example documents it.
+#
+# NOTE: ui/.env (Compose variable substitution, this project) is unrelated to
+# the API's src/api/.env (application configuration).
+name: products-ui
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: products-ui-nginx
+    restart: unless-stopped
+    ports:
+      - '${UI_PORT:-8080}:80'
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./src:/usr/share/nginx/html/src:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - products-network
+
+networks:
+  # Created and owned by the API compose project. Declared external so this
+  # project never tries to create or modify it.
+  products-network:
+    external: true
+    name: products_products-network

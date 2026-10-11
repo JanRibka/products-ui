@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Produkty – přehled</title>
+    <meta
+      name="description"
+      content="Přehledná tabulka produktů s filtrováním, řazením, stránkováním a exportem do CSV."
+    />
+    <link rel="stylesheet" href="./src/app/styles/index.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Přeskočit na obsah</a>
+
+    <header class="app-header">
+      <h1>Produkty</h1>
+    </header>
+
+    <main id="main" class="app-main">
+      <!-- The products page is mounted here by src/app/main.js -->
+      <div id="app" data-products-root></div>
+    </main>
+
+    <script type="module" src="./src/app/main.js"></script>
+  </body>
+</html>
